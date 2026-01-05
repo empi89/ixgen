@@ -119,13 +119,14 @@ func WorkerMergePeerConfiguration(exchanges ixtypes.IXs, apiServiceURL string, a
 				if peer.Asn == myASN {
 					continue
 				}
-
+				lockASNList.Lock()
 				if _, exists := ASNList[peer.Asn]; !exists {
+					lockASNList.Unlock()
 					log.Printf("Error pulling ASN for peer: %d\n", peer.Asn)
 					continue
 				}
-
 				peerDbNetwork := ASNList[peer.Asn]
+				lockASNList.Unlock()
 				if err != nil {
 					log.Printf("Error pulling ASN for peer: %d, error: %s", peer.Asn, err)
 					continue
