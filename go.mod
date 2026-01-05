@@ -1,3 +1,3 @@
-module github.com/empi89/ixgen
+module github.com/ipcjk/ixgen
 
 go 1.17
